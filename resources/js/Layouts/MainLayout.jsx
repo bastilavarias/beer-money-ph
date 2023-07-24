@@ -13,7 +13,7 @@ export default function MainLayout({ children }) {
     const theme = useTheme();
     const style = {
         root: {
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: "#f9f9f9",
             height: "100vh",
             color: "white",
         },
