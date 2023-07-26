@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
+import AvatarGroup from "@mui/material/AvatarGroup";
 
 export default function JobPostCard() {
     return (
@@ -75,7 +76,34 @@ export default function JobPostCard() {
                             justifyContent: "space-between",
                         }}
                     >
-                        <Box></Box>
+                        <Box>
+                            <AvatarGroup max={6}>
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                    sx={{
+                                        width: "1.5rem",
+                                        height: "1.5rem",
+                                    }}
+                                />
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                    sx={{
+                                        width: "1.5rem",
+                                        height: "1.5rem",
+                                    }}
+                                />
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                    sx={{
+                                        width: "1.5rem",
+                                        height: "1.5rem",
+                                    }}
+                                />
+                            </AvatarGroup>
+                        </Box>
                         <Box>
                             <Typography
                                 sx={{ fontWeight: "bold" }}
@@ -86,8 +114,6 @@ export default function JobPostCard() {
                                 ₱ 150.00
                             </Typography>
                         </Box>
-                        {/*// Maybe a views here with avatars*/}
-                        {/*-------------------------------- Budget here*/}
                     </CardActions>
                 </Card>
             </Box>
