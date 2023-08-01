@@ -10,113 +10,138 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import JobInformationModal from "@/Components/JobInformationModal";
+import { useTheme } from "@mui/material/styles";
 
 export default function JobPostCard() {
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const rootRef = React.useRef(null);
+
+    const theme = useTheme();
+
+    const onHandleModalOpen = () => setIsModalOpen(true);
+
     return (
-        <>
-            <Box sx={{ width: "100%" }}>
-                <Card color="primary" variant="outlined">
-                    <ListItem
-                        dense={true}
-                        alignItems="flex-start"
-                        secondaryAction={
+        <Box sx={{ width: "100%" }} onClick={onHandleModalOpen} ref={rootRef}>
+            <Card color="primary" variant="outlined">
+                <ListItem
+                    dense={true}
+                    alignItems="flex-start"
+                    secondaryAction={
+                        <React.Fragment>
+                            <Chip size="small" label="Microtask" />
+                        </React.Fragment>
+                    }
+                >
+                    <ListItemAvatar>
+                        <Avatar
+                            alt="Remy Sharp"
+                            src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                        />
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={
                             <React.Fragment>
-                                <Chip size="small" label="Category" />
+                                <Typography
+                                    sx={{ fontWeight: 500 }}
+                                    component="h6"
+                                    variant="subtitle1"
+                                >
+                                    John Doe
+                                </Typography>
                             </React.Fragment>
                         }
+                        secondary={
+                            <React.Fragment>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    sx={{ fontSize: ".8rem" }}
+                                >
+                                    3 days ago
+                                </Typography>
+                            </React.Fragment>
+                        }
+                    />
+                </ListItem>
+                <CardContent sx={{ paddingTop: "0" }}>
+                    <Typography
+                        variant="body1"
+                        component="h6"
+                        sx={{ fontWeight: 500 }}
                     >
-                        <ListItemAvatar>
+                        Encode human resource data
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        component="p"
+                        sx={{
+                            paddingBottom: ".5rem",
+                        }}
+                    >
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Eum, sint... View job
+                    </Typography>
+                    <Typography variant="caption" component="span">
+                        3 available slots | GCash
+                    </Typography>
+                </CardContent>
+                <CardActions
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Box>
+                        <AvatarGroup max={6}>
                             <Avatar
                                 alt="Remy Sharp"
                                 src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                sx={{
+                                    width: "1.5rem",
+                                    height: "1.5rem",
+                                }}
                             />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={
-                                <React.Fragment>
-                                    <Typography
-                                        sx={{ fontWeight: 500 }}
-                                        component="h6"
-                                        variant="subtitle1"
-                                    >
-                                        John Doe
-                                    </Typography>
-                                </React.Fragment>
-                            }
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        sx={{ fontSize: ".8rem" }}
-                                    >
-                                        3 days ago
-                                    </Typography>
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
-                    <CardContent sx={{ paddingTop: "0" }}>
+                            <Avatar
+                                alt="Remy Sharp"
+                                src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                sx={{
+                                    width: "1.5rem",
+                                    height: "1.5rem",
+                                }}
+                            />
+                            <Avatar
+                                alt="Remy Sharp"
+                                src="https://avatars.githubusercontent.com/u/24890911?v=4"
+                                sx={{
+                                    width: "1.5rem",
+                                    height: "1.5rem",
+                                }}
+                            />
+                        </AvatarGroup>
+                    </Box>
+                    <Box>
                         <Typography
-                            variant="body1"
-                            component="h6"
-                            sx={{ fontWeight: 500 }}
+                            sx={{
+                                fontWeight: "bold",
+                                color: theme.palette.success.main,
+                            }}
+                            variant="subtitle2"
+                            component="p"
                         >
-                            Lorem ipsum dolor.
+                            ₱ 150.00
                         </Typography>
-                        <Typography variant="body2" component="p">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Eum, sint... See more
-                        </Typography>
-                    </CardContent>
-                    <CardActions
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Box>
-                            <AvatarGroup max={6}>
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
-                                    sx={{
-                                        width: "1.5rem",
-                                        height: "1.5rem",
-                                    }}
-                                />
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
-                                    sx={{
-                                        width: "1.5rem",
-                                        height: "1.5rem",
-                                    }}
-                                />
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="https://avatars.githubusercontent.com/u/24890911?v=4"
-                                    sx={{
-                                        width: "1.5rem",
-                                        height: "1.5rem",
-                                    }}
-                                />
-                            </AvatarGroup>
-                        </Box>
-                        <Box>
-                            <Typography
-                                sx={{ fontWeight: "bold" }}
-                                variant="subtitle2"
-                                component="p"
-                                color="#4caf50"
-                            >
-                                ₱ 150.00
-                            </Typography>
-                        </Box>
-                    </CardActions>
-                </Card>
-            </Box>
-        </>
+                    </Box>
+                </CardActions>
+            </Card>
+
+            <JobInformationModal
+                open={isModalOpen}
+                rootRef={rootRef}
+                setIsModalOpen={setIsModalOpen}
+            />
+        </Box>
     );
 }
