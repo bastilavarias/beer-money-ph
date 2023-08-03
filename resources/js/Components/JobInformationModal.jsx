@@ -19,7 +19,6 @@ export default function JobInformationModal({ open, rootRef, setIsModalOpen }) {
     const [openLocal, setOpenLocal] = React.useState(open);
 
     const theme = useTheme();
-    console.log(theme);
 
     const onHandleCloseModal = () => setIsModalOpen(false);
 
@@ -207,14 +206,19 @@ export default function JobInformationModal({ open, rootRef, setIsModalOpen }) {
                                 <Button
                                     size="small"
                                     sx={{
-                                        textTransform: "capitalize",
                                         paddingX: 5,
+                                        textTransform: "lowercase",
                                     }}
                                     variant="contained"
                                     color="primary"
                                     disableElevation={true}
                                 >
-                                    Apply
+                                    <span
+                                        style={{ textTransform: "capitalize" }}
+                                    >
+                                        S
+                                    </span>
+                                    ee full details
                                 </Button>
                             </Box>
                         </Grid>

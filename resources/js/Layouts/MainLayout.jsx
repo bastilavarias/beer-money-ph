@@ -8,13 +8,14 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import Container from "@mui/material/Container";
+import { Link } from "@inertiajs/react";
 
 export default function MainLayout({ children }) {
     const theme = useTheme();
     const style = {
         root: {
             backgroundColor: "#eef2f5",
-            height: "100vh",
+            minHeight: "100vh",
             color: "white",
         },
     };
@@ -48,11 +49,32 @@ export default function MainLayout({ children }) {
                             >
                                 BeerMoneyPH
                             </Typography>
-                            <Button className="font-bold" color="inherit">
+                            <Button
+                                component={Link}
+                                href="/employer/dashboard"
+                                className="font-bold"
+                                color="inherit"
+                            >
+                                Dashboard
+                            </Button>
+                            <Button
+                                component={Link}
+                                href="/"
+                                className="font-bold"
+                                color="inherit"
+                            >
                                 Home
                             </Button>
-                            <Button className="font-bold" color="inherit">
+                            <Button
+                                component={Link}
+                                href="/sign-in"
+                                className="font-bold"
+                                color="inherit"
+                            >
                                 Login
+                            </Button>
+                            <Button className="font-bold" color="inherit">
+                                Profile
                             </Button>
                         </Toolbar>
                     </Container>

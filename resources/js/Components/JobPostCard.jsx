@@ -21,10 +21,6 @@ export default function JobPostCard() {
     const theme = useTheme();
 
     const onHandleModalOpen = () => setIsModalOpen(true);
-    const ontest = (value) => {
-        console.log(value);
-        setIsModalOpen(false);
-    };
 
     return (
         <React.Fragment>
@@ -74,7 +70,7 @@ export default function JobPostCard() {
                             }
                         />
                     </ListItem>
-                    <CardContent sx={{ paddingTop: "0" }}>
+                    <CardContent>
                         <Typography
                             variant="body1"
                             component="h6"
