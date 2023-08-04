@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function SignUp() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -28,7 +28,7 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="SignUp" />
 
             <form onSubmit={submit}>
                 <div>
@@ -108,7 +108,7 @@ export default function Register() {
                     </Link>
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
+                        SignUp
                     </PrimaryButton>
                 </div>
             </form>

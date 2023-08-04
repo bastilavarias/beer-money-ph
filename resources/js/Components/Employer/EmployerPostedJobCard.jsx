@@ -6,14 +6,11 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import ListItem from "@mui/material/ListItem";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
-import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 
 export default function EmployerPostedJobCard() {
     const [anchorEl, setAnchorEl] = React.useState(null);

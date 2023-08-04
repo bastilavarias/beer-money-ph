@@ -95,7 +95,7 @@ export default function SignIn() {
                                         </Typography>
                                     </Divider>
                                 </CardContent>
-                                <CardContent>
+                                <CardContent sx={{ paddingBottom: 5 }}>
                                     <Grid container>
                                         <Grid item xs={12} paddingBottom={2}>
                                             <Button
@@ -112,6 +112,34 @@ export default function SignIn() {
                                             </Button>
                                         </Grid>
                                     </Grid>
+                                </CardContent>
+                                <CardContent>
+                                    <Box
+                                        sx={{
+                                            textAlign: "center",
+                                            paddingBottom: 2,
+                                        }}
+                                    >
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            color="black"
+                                        >
+                                            or register manually
+                                        </Typography>
+                                    </Box>
+                                    <Button
+                                        color="primary"
+                                        variant="outlined"
+                                        size="large"
+                                        fullWidth={true}
+                                        disableElevation={true}
+                                        sx={{
+                                            textTransform: "capitalize",
+                                        }}
+                                    >
+                                        Register
+                                    </Button>
                                 </CardContent>
                             </Card>
                         </Box>

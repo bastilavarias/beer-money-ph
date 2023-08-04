@@ -24,6 +24,10 @@ Route::get("/sign-in", function () {
     return Inertia::render("SignIn");
 });
 
+Route::get("/sign-up", function () {
+    return Inertia::render("SignUp");
+});
+
 Route::get("/employer/dashboard", function () {
     return Inertia::render("EmployerDashboard");
 });

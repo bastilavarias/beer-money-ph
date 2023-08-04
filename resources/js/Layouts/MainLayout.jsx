@@ -73,6 +73,14 @@ export default function MainLayout({ children }) {
                             >
                                 Login
                             </Button>
+                            <Button
+                                component={Link}
+                                href="/sign-up"
+                                className="font-bold"
+                                color="inherit"
+                            >
+                                Register
+                            </Button>
                             <Button className="font-bold" color="inherit">
                                 Profile
                             </Button>

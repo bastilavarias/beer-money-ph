@@ -19,7 +19,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Register the exception handling callbacks for the application.
+     * SignUp the exception handling callbacks for the application.
      */
     public function register(): void
     {
