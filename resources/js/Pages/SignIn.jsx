@@ -13,8 +13,21 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useForm } from "@inertiajs/react";
 
 export default function SignIn() {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        email: "test@gmail.com",
+        password: "123456",
+        remember: false,
+    });
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        post(route("login"));
+    };
+
     return (
         <>
             <MainLayout>
@@ -107,6 +120,7 @@ export default function SignIn() {
                                                     textTransform: "capitalize",
                                                 }}
                                                 startIcon={<GoogleIcon />}
+                                                onClick={submit}
                                             >
                                                 Google
                                             </Button>

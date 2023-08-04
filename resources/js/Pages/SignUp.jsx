@@ -235,7 +235,7 @@ export default function SignUp() {
                                                     textTransform: "capitalize",
                                                 }}
                                             >
-                                                Register
+                                                Regsiter
                                             </Button>
                                         </Grid>
                                     </Grid>
