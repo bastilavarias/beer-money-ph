@@ -3,7 +3,8 @@ import Container from "@mui/material/Container";
 import JobPostCard from "../components/JobPostCard";
 import Grid from "@mui/material/Grid";
 
-export default function Welcome() {
+export default function Welcome({ user }) {
+    console.log(user);
     return (
         <>
             <MainLayout>
@@ -23,6 +24,7 @@ export default function Welcome() {
                         <Grid item xs={12} md={6} lg={4}>
                             <JobPostCard />
                         </Grid>
+                        <Grid item xs={12} md={6} lg={4}></Grid>
                     </Grid>
                 </Container>
             </MainLayout>

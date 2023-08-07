@@ -22,12 +22,6 @@ export default function SignIn() {
         remember: false,
     });
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route("login"));
-    };
-
     return (
         <>
             <MainLayout>
@@ -120,9 +114,24 @@ export default function SignIn() {
                                                     textTransform: "capitalize",
                                                 }}
                                                 startIcon={<GoogleIcon />}
-                                                onClick={submit}
+                                                href="/auth/google/redirect"
                                             >
                                                 Google
+                                            </Button>
+                                        </Grid>
+                                        <Grid item xs={12} paddingBottom={2}>
+                                            <Button
+                                                variant="outlined"
+                                                size="large"
+                                                fullWidth={true}
+                                                disableElevation={true}
+                                                sx={{
+                                                    textTransform: "capitalize",
+                                                }}
+                                                startIcon={<GoogleIcon />}
+                                                href="/auth/github/redirect"
+                                            >
+                                                Github
                                             </Button>
                                         </Grid>
                                     </Grid>

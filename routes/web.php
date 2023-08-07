@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthProviderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,8 +19,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get("/", function () {
-    return Inertia::render("Welcome");
+Route::get("/", function (Request $request) {
+    return Inertia::render("Welcome", [
+        "user" => session("user_session", []),
+    ]);
 });
 
 Route::get("/sign-in", function () {
@@ -31,6 +36,15 @@ Route::get("/sign-up", function () {
 Route::get("/employer/dashboard", function () {
     return Inertia::render("EmployerDashboard");
 });
+
+Route::get("/auth/{provider}/redirect", [
+    AuthProviderController::class,
+    "redirect",
+]);
+Route::get("/auth/{provider}/callback", [
+    AuthProviderController::class,
+    "callback",
+]);
 
 //Route::get("/dashboard", function () {
 //    return Inertia::render("EmployerDashboard");
