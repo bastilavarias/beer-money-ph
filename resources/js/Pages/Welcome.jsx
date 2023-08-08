@@ -4,10 +4,9 @@ import JobPostCard from "../components/JobPostCard";
 import Grid from "@mui/material/Grid";
 
 export default function Welcome({ user }) {
-    console.log(user);
     return (
         <>
-            <MainLayout>
+            <MainLayout user={user}>
                 <Container
                     maxWidth="lg"
                     style={{

@@ -9,8 +9,15 @@ import IconButton from "@mui/material/IconButton";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import Container from "@mui/material/Container";
 import { Link } from "@inertiajs/react";
+import Tooltip from "@mui/material/Tooltip";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ user, children }) {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
     const theme = useTheme();
     const style = {
         root: {
@@ -18,6 +25,47 @@ export default function MainLayout({ children }) {
             minHeight: "100vh",
             color: "white",
         },
+    };
+    const navigations = [
+        {
+            href: "/",
+            text: "Home",
+            protected: false,
+        },
+        {
+            href: "/",
+            text: "Home",
+            protected: true,
+        },
+        {
+            href: "/employer/dashboard",
+            text: "Dashboard",
+            protected: true,
+        },
+        {
+            href: "/sign-in",
+            text: "Login",
+            protected: false,
+        },
+        {
+            href: "/sign-up",
+            text: "Register",
+            protected: false,
+        },
+        {
+            href: "/profile",
+            text: "Profile",
+            protected: true,
+        },
+    ];
+    const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+    const isAuthenticated = () => !!user;
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
     };
 
     return (
@@ -49,41 +97,61 @@ export default function MainLayout({ children }) {
                             >
                                 BeerMoneyPH
                             </Typography>
-                            <Button
-                                component={Link}
-                                href="/employer/dashboard"
-                                className="font-bold"
-                                color="inherit"
-                            >
-                                Dashboard
-                            </Button>
-                            <Button
-                                component={Link}
-                                href="/"
-                                className="font-bold"
-                                color="inherit"
-                            >
-                                Home
-                            </Button>
-                            <Button
-                                component={Link}
-                                href="/sign-in"
-                                className="font-bold"
-                                color="inherit"
-                            >
-                                Login
-                            </Button>
-                            <Button
-                                component={Link}
-                                href="/sign-up"
-                                className="font-bold"
-                                color="inherit"
-                            >
-                                Register
-                            </Button>
-                            <Button className="font-bold" color="inherit">
-                                Profile
-                            </Button>
+                            {navigations.map((navigation, index) =>
+                                navigation.protected === isAuthenticated() ? (
+                                    <Button
+                                        component={Link}
+                                        href={navigation.href}
+                                        className="font-bold"
+                                        color="inherit"
+                                        key={index}
+                                    >
+                                        {navigation.text}
+                                    </Button>
+                                ) : null
+                            )}
+                            {isAuthenticated() ? (
+                                <Box sx={{ flexGrow: 0, marginLeft: 1 }}>
+                                    <Tooltip title="Open settings">
+                                        <IconButton
+                                            onClick={handleOpenUserMenu}
+                                            sx={{ p: 0 }}
+                                        >
+                                            <Avatar
+                                                alt={user.first_name}
+                                                src={user.picture || null}
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{ mt: "45px" }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        {settings.map((setting) => (
+                                            <MenuItem
+                                                key={setting}
+                                                onClick={handleCloseUserMenu}
+                                            >
+                                                <Typography textAlign="center">
+                                                    {setting}
+                                                </Typography>
+                                            </MenuItem>
+                                        ))}
+                                    </Menu>
+                                </Box>
+                            ) : null}
                         </Toolbar>
                     </Container>
                 </AppBar>

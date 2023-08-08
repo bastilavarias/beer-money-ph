@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -37,12 +38,10 @@ class AuthProviderController extends Controller
                 "provider_token" => $oauthUser->token,
             ]);
         }
-        $user = $user->first();
-        info($user->toArray());
-        session(["user_session", $user->toArray()]);
+        Auth::login($user->first(), true);
 
-        return Inertia::render("Welcome", [
-            "user" => session("user_session", []),
+        return Inertia::render("", [
+            "user" => Auth::user(),
         ]);
     }
 }

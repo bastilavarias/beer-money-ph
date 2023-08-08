@@ -21,7 +21,7 @@ use Inertia\Inertia;
 
 Route::get("/", function (Request $request) {
     return Inertia::render("Welcome", [
-        "user" => session("user_session", []),
+        "user" => Auth::check() ? Auth::user() : null,
     ]);
 });
 
