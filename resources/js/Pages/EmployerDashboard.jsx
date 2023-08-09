@@ -9,10 +9,10 @@ import Grid from "@mui/material/Grid";
 import EmployerJobForm from "@/Components/Employer/EmployerJobForm.jsx";
 import EmployerPostedJobList from "@/Components/Employer/EmployerPostedJobList";
 
-export default function EmployerDashboard() {
+export default function EmployerDashboard({ user, job_categories }) {
     return (
         <>
-            <MainLayout>
+            <MainLayout user={user}>
                 <Container
                     maxWidth="lg"
                     style={{
@@ -45,12 +45,13 @@ export default function EmployerDashboard() {
                                     </Typography>
                                 </React.Fragment>
                             }
-                        >
-                        </CardHeader>
+                        ></CardHeader>
                         <CardContent>
                             <Grid container spacing={2}>
                                 <Grid item xs={7}>
-                                    <EmployerJobForm />
+                                    <EmployerJobForm
+                                        jobCategories={job_categories}
+                                    />
                                 </Grid>
                                 <Grid item xs={5}>
                                     <EmployerPostedJobList />

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthProviderController;
+use App\Http\Controllers\EmployerDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -25,43 +26,33 @@ Route::get("/", function (Request $request) {
     ]);
 });
 
-Route::get("/sign-in", function () {
-    return Inertia::render("SignIn");
-});
+Route::middleware(["guest"])
+    ->get("/sign-in", function () {
+        return Inertia::render("SignIn");
+    })
+    ->name("sign-in");
 
-Route::get("/sign-up", function () {
+Route::middleware(["guest"])->get("/sign-up", function () {
     return Inertia::render("SignUp");
 });
 
-Route::get("/employer/dashboard", function () {
-    return Inertia::render("EmployerDashboard");
+Route::middleware(["auth"])->get("/employer/dashboard", [
+    EmployerDashboardController::class,
+    "index",
+]);
+
+Route::prefix("auth")->group(function () {
+    Route::get("/{provider}/redirect", [
+        AuthProviderController::class,
+        "redirect",
+    ]);
+    Route::get("/{provider}/callback", [
+        AuthProviderController::class,
+        "callback",
+    ]);
+    Route::middleware(["auth"])
+        ->post("/logout", [AuthProviderController::class, "logout"])
+        ->name("logout");
 });
-
-Route::get("/auth/{provider}/redirect", [
-    AuthProviderController::class,
-    "redirect",
-]);
-Route::get("/auth/{provider}/callback", [
-    AuthProviderController::class,
-    "callback",
-]);
-
-//Route::get("/dashboard", function () {
-//    return Inertia::render("EmployerDashboard");
-//})
-//    ->middleware(["auth", "verified"])
-//    ->name("dashboard");
-//
-//Route::middleware("auth")->group(function () {
-//    Route::get("/profile", [ProfileController::class, "edit"])->name(
-//        "profile.edit"
-//    );
-//    Route::patch("/profile", [ProfileController::class, "update"])->name(
-//        "profile.update"
-//    );
-//    Route::delete("/profile", [ProfileController::class, "destroy"])->name(
-//        "profile.destroy"
-//    );
-//});
 
 require __DIR__ . "/auth.php";

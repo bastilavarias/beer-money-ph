@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { router } from "@inertiajs/react";
 
 export default function MainLayout({ user, children }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -58,7 +59,7 @@ export default function MainLayout({ user, children }) {
             protected: true,
         },
     ];
-    const settings = ["Profile", "Account", "Dashboard", "Logout"];
+    const settings = ["Logout"];
 
     const isAuthenticated = () => !!user;
     const handleOpenUserMenu = (event) => {
@@ -66,6 +67,9 @@ export default function MainLayout({ user, children }) {
     };
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+    const handleLogout = () => {
+        route("logout");
     };
 
     return (
@@ -139,16 +143,15 @@ export default function MainLayout({ user, children }) {
                                         open={Boolean(anchorElUser)}
                                         onClose={handleCloseUserMenu}
                                     >
-                                        {settings.map((setting) => (
-                                            <MenuItem
-                                                key={setting}
-                                                onClick={handleCloseUserMenu}
-                                            >
-                                                <Typography textAlign="center">
-                                                    {setting}
-                                                </Typography>
-                                            </MenuItem>
-                                        ))}
+                                        <MenuItem
+                                            href={route("logout")}
+                                            method="post"
+                                            as={Link}
+                                        >
+                                            <Typography textAlign="center">
+                                                Logout
+                                            </Typography>
+                                        </MenuItem>
                                     </Menu>
                                 </Box>
                             ) : null}
