@@ -17,7 +17,7 @@ import Avatar from "@mui/material/Avatar";
 
 export default function EmployerJobForm({ jobCategories }) {
     const theme = useTheme();
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post } = useForm({
         category: "",
         name: "",
         description: "",
@@ -25,6 +25,14 @@ export default function EmployerJobForm({ jobCategories }) {
         slots: 0,
         payments: [],
     });
+    const defaultError = {
+        category: false,
+        name: false,
+        description: false,
+        budget: false,
+        slots: false,
+    };
+    const [error, setError] = React.useState(defaultError);
 
     const PaymentMethodCheckBox = ({ name, text }) => {
         return (
@@ -110,9 +118,17 @@ export default function EmployerJobForm({ jobCategories }) {
             onSuccess: () => {},
             onError: (err) => {
                 console.log(err);
+                setError(
+                    Object.assign(
+                        {},
+                        {
+                            ...defaultError,
+                            ...err,
+                        }
+                    )
+                );
             },
         });
-        console.log(errors);
     };
 
     return (
@@ -160,6 +176,8 @@ export default function EmployerJobForm({ jobCategories }) {
                         fullWidth={true}
                         placeholder="Job"
                         onChange={(e) => setData("name", e.target.value)}
+                        error={error.name}
+                        helperText={error.name}
                     ></TextField>
                 </Grid>
                 <Grid item xs={12} paddingBottom={2}>
@@ -170,6 +188,8 @@ export default function EmployerJobForm({ jobCategories }) {
                         multiline
                         rows={4}
                         onChange={(e) => setData("description", e.target.value)}
+                        error={error.description}
+                        helperText={error.description}
                     ></TextField>
                 </Grid>
                 <Grid item container spacing={2} paddingBottom={2}>
@@ -181,6 +201,7 @@ export default function EmployerJobForm({ jobCategories }) {
                             type="number"
                             helperText="Amount in Philippine peso (₱)"
                             onChange={(e) => setData("budget", e.target.value)}
+                            error={error.budget}
                         ></TextField>
                     </Grid>
                     <Grid item xs={4}>
@@ -190,6 +211,8 @@ export default function EmployerJobForm({ jobCategories }) {
                             placeholder="Slots"
                             type="number"
                             onChange={(e) => setData("slots", e.target.value)}
+                            error={error.slots}
+                            helperText={error.slots}
                         ></TextField>
                     </Grid>
                 </Grid>
