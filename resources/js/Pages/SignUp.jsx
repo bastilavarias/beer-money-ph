@@ -1,7 +1,7 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import MainLayout from "@/Layouts/MainLayout";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";

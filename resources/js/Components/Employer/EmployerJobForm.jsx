@@ -13,20 +13,106 @@ import { useForm } from "@inertiajs/react";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Avatar from "@mui/material/Avatar";
 
 export default function EmployerJobForm({ jobCategories }) {
     const theme = useTheme();
     const { data, setData, post, processing, errors } = useForm({
-        category: null,
-        name: null,
-        description: null,
+        category: "",
+        name: "",
+        description: "",
         budget: 0,
         slots: 0,
         payments: [],
     });
 
-    const handleSubmit = () => {
-        console.log(data);
+    const PaymentMethodCheckBox = ({ name, text }) => {
+        return (
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        value={name}
+                        onChange={handleCheckBoxChange}
+                        checked={data.payments.includes(name)}
+                    />
+                }
+                label={
+                    <React.Fragment>
+                        <Box sx={{ display: "flex" }}>
+                            <Typography
+                                variant="span"
+                                component="span"
+                                sx={{
+                                    fontWeight: "bold",
+                                    marginRight: 1,
+                                }}
+                            >
+                                {text}
+                            </Typography>
+                            <Avatar
+                                sx={{
+                                    width: 24,
+                                    height: 24,
+                                }}
+                                alt={`${text} Icon`}
+                                src={`/assets/icons/${name}.png`}
+                            />
+                        </Box>
+                    </React.Fragment>
+                }
+            />
+        );
+    };
+    const PaymentMethodCheckBoxGroup = () => {
+        const methods = [
+            {
+                text: "Gcash",
+                name: "gcash",
+            },
+            {
+                text: "MAYA",
+                name: "maya",
+            },
+            {
+                text: "Bank Transfer",
+                name: "bank",
+            },
+        ];
+        return (
+            <FormGroup>
+                {methods.map((method, index) => (
+                    <PaymentMethodCheckBox
+                        name={method.name}
+                        text={method.text}
+                        key={index}
+                    ></PaymentMethodCheckBox>
+                ))}
+            </FormGroup>
+        );
+    };
+
+    const handleCheckBoxChange = (e) => {
+        const payment = e.target.value;
+        const paymentsCopy = [...data.payments];
+        if (paymentsCopy.includes(payment)) {
+            setData(
+                "payments",
+                paymentsCopy.filter((_payment) => _payment !== payment)
+            );
+        } else {
+            setData("payments", [...data.payments, e.target.value]);
+        }
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route("job-post.store"), {
+            preserveScroll: true,
+            onSuccess: () => {},
+            onError: (err) => {
+                console.log(err);
+            },
+        });
+        console.log(errors);
     };
 
     return (
@@ -58,6 +144,7 @@ export default function EmployerJobForm({ jobCategories }) {
                             onChange={(e) =>
                                 setData("category", e.target.value)
                             }
+                            value={data.category}
                         >
                             {jobCategories.map((category, index) => (
                                 <MenuItem value={category.slug} key={index}>
@@ -85,7 +172,7 @@ export default function EmployerJobForm({ jobCategories }) {
                         onChange={(e) => setData("description", e.target.value)}
                     ></TextField>
                 </Grid>
-                <Grid item container spacing={2} xs={12} paddingBottom={2}>
+                <Grid item container spacing={2} paddingBottom={2}>
                     <Grid item xs={8}>
                         <TextField
                             size="small"
@@ -106,8 +193,8 @@ export default function EmployerJobForm({ jobCategories }) {
                         ></TextField>
                     </Grid>
                 </Grid>
-                <Grid xs={12} container paddingBottom={2}>
-                    <Grid xs={12} paddingBottom={2}>
+                <Grid container paddingBottom={2}>
+                    <Grid xs={12} item paddingBottom={2}>
                         <Typography
                             variant="subtitle2"
                             component="p"
@@ -118,23 +205,8 @@ export default function EmployerJobForm({ jobCategories }) {
                             Payment methods
                         </Typography>
                     </Grid>
-                    <Grid xs={12}>
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<Checkbox defaultChecked />}
-                                label="Label"
-                            />
-                            <FormControlLabel
-                                required
-                                control={<Checkbox />}
-                                label="Required"
-                            />
-                            <FormControlLabel
-                                disabled
-                                control={<Checkbox />}
-                                label="Disabled"
-                            />
-                        </FormGroup>
+                    <Grid item xs={12}>
+                        <PaymentMethodCheckBoxGroup />
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>

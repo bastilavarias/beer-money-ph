@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthProviderController;
 use App\Http\Controllers\EmployerDashboardController;
+use App\Http\Controllers\JobPostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -36,10 +37,9 @@ Route::middleware(["guest"])->get("/sign-up", function () {
     return Inertia::render("SignUp");
 });
 
-Route::middleware(["auth"])->get("/employer/dashboard", [
-    EmployerDashboardController::class,
-    "index",
-]);
+Route::middleware(["auth"])
+    ->get("/employer/dashboard", [EmployerDashboardController::class, "index"])
+    ->name("employer-dashboard");
 
 Route::prefix("auth")->group(function () {
     Route::get("/{provider}/redirect", [
@@ -51,8 +51,16 @@ Route::prefix("auth")->group(function () {
         "callback",
     ]);
     Route::middleware(["auth"])
-        ->post("/logout", [AuthProviderController::class, "logout"])
+        ->get("/logout", [AuthProviderController::class, "logout"])
         ->name("logout");
 });
+
+Route::prefix("job-post")
+    ->middleware(["auth"])
+    ->group(function () {
+        Route::post("/", [JobPostController::class, "store"])->name(
+            "job-post.store"
+        );
+    });
 
 require __DIR__ . "/auth.php";

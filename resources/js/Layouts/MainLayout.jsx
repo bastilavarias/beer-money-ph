@@ -68,9 +68,6 @@ export default function MainLayout({ user, children }) {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-    const handleLogout = () => {
-        route("logout");
-    };
 
     return (
         <>
@@ -145,7 +142,6 @@ export default function MainLayout({ user, children }) {
                                     >
                                         <MenuItem
                                             href={route("logout")}
-                                            method="post"
                                             as={Link}
                                         >
                                             <Typography textAlign="center">

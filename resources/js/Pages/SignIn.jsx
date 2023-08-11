@@ -7,7 +7,7 @@ import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import SportsBarIcon from "@mui/icons-material/SportsBar.js";
 import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
