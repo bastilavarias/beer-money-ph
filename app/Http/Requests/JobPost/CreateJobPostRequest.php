@@ -24,10 +24,10 @@ class CreateJobPostRequest extends FormRequest
         return [
             "name" => "required|string",
             "description" => "required|string",
-            "budget" => "required|numeric|between:0,99.99",
+            "budget" => "required|numeric",
             "slots" => "required|integer",
-            "payment_methods" => "required|array",
-            "payment_methods.*" => "required|string",
+//            "payment_methods" => "required|array",
+//            "payment_methods.*" => "required|string",
         ];
     }
 }

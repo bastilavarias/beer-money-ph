@@ -15,6 +15,9 @@ class EmployerDashboardController extends Controller
         return Inertia::render("EmployerDashboard", [
             "user" => Auth::user(),
             "job_categories" => JobCategory::all(),
+            "job_posts" => Auth::user()
+                ->job_posts()
+                ->paginate(5),
         ]);
     }
 }

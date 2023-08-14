@@ -3,9 +3,18 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import EmployerPostedJobCard from "@/Components/Employer/EmployerPostedJobCard";
-
-export default function EmployerPostedJobList() {
+export default function EmployerPostedJobList({ jobPosts }) {
     const theme = useTheme();
+
+    const PostedJobCards = () => {
+        return jobPosts.map((job) => (
+            <React.Fragment>
+                <Grid item xs={12} paddingBottom={2}>
+                    <EmployerPostedJobCard job={job} />
+                </Grid>
+            </React.Fragment>
+        ));
+    };
 
     return (
         <>
@@ -18,19 +27,11 @@ export default function EmployerPostedJobList() {
                             color: theme.palette.grey[700],
                         }}
                     >
-                        Posted Jobs (3)
+                        Posted Jobs ({jobPosts.length || 0})
                     </Typography>
                 </Grid>
                 <Grid item container xs={12}>
-                    <Grid item xs={12} paddingBottom={2}>
-                        <EmployerPostedJobCard />
-                    </Grid>
-                    <Grid item xs={12} paddingBottom={2}>
-                        <EmployerPostedJobCard />
-                    </Grid>
-                    <Grid item xs={12} paddingBottom={2}>
-                        <EmployerPostedJobCard />
-                    </Grid>
+                    <PostedJobCards />
                 </Grid>
             </Grid>
         </>

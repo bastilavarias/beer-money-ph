@@ -9,7 +9,9 @@ import Grid from "@mui/material/Grid";
 import EmployerJobForm from "@/Components/Employer/EmployerJobForm.jsx";
 import EmployerPostedJobList from "@/Components/Employer/EmployerPostedJobList";
 
-export default function EmployerDashboard({ user, job_categories }) {
+export default function EmployerDashboard({ user, job_categories, job_posts }) {
+    console.log(job_posts);
+
     return (
         <>
             <MainLayout user={user}>
@@ -54,7 +56,9 @@ export default function EmployerDashboard({ user, job_categories }) {
                                     />
                                 </Grid>
                                 <Grid item xs={5}>
-                                    <EmployerPostedJobList />
+                                    <EmployerPostedJobList
+                                        jobPosts={job_posts.data}
+                                    />
                                 </Grid>
                             </Grid>
                         </CardContent>

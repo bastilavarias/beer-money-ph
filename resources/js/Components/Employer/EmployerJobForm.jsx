@@ -15,23 +15,25 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Avatar from "@mui/material/Avatar";
 
+const defaultForm = {
+    category: "",
+    name: "",
+    description: "",
+    budget: 0,
+    slots: 0,
+    payments: [],
+};
+const defaultError = {
+    category: false,
+    name: false,
+    description: false,
+    budget: false,
+    slots: false,
+};
+
 export default function EmployerJobForm({ jobCategories }) {
     const theme = useTheme();
-    const { data, setData, post } = useForm({
-        category: "",
-        name: "",
-        description: "",
-        budget: 0,
-        slots: 0,
-        payments: [],
-    });
-    const defaultError = {
-        category: false,
-        name: false,
-        description: false,
-        budget: false,
-        slots: false,
-    };
+    const { data, setData, post } = useForm(defaultForm);
     const [error, setError] = React.useState(defaultError);
 
     const PaymentMethodCheckBox = ({ name, text }) => {
@@ -114,10 +116,11 @@ export default function EmployerJobForm({ jobCategories }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("job-post.store"), {
-            preserveScroll: true,
-            onSuccess: () => {},
+            onSuccess: (data) => {
+                console.log("Creating job success.");
+                resetForm();
+            },
             onError: (err) => {
-                console.log(err);
                 setError(
                     Object.assign(
                         {},
@@ -129,6 +132,14 @@ export default function EmployerJobForm({ jobCategories }) {
                 );
             },
         });
+    };
+    const resetForm = () => {
+        setData("category", "");
+        setData("name", "");
+        setData("description", "");
+        setData("budget", 0);
+        setData("slots", 0);
+        setData("payments", []);
     };
 
     return (

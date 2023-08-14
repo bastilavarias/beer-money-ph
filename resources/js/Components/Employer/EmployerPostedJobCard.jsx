@@ -12,7 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 
-export default function EmployerPostedJobCard() {
+export default function EmployerPostedJobCard({ job }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const theme = useTheme();
     const open = Boolean(anchorEl);
@@ -24,6 +24,8 @@ export default function EmployerPostedJobCard() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    console.log(job);
 
     return (
         <React.Fragment>
@@ -37,7 +39,7 @@ export default function EmployerPostedJobCard() {
                                     component="h6"
                                     sx={{ fontWeight: 500 }}
                                 >
-                                    Encode human resource data
+                                    {job.name}
                                 </Typography>
                             </React.Fragment>
                         }
@@ -120,8 +122,7 @@ export default function EmployerPostedJobCard() {
                     ></CardHeader>
                     <CardContent sx={{ paddingTop: 0 }}>
                         <Typography variant="body2" component="p">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Eum, sint...
+                            {job.description}
                         </Typography>
                     </CardContent>
                     <CardActions
@@ -141,7 +142,7 @@ export default function EmployerPostedJobCard() {
                                 variant="subtitle2"
                                 component="p"
                             >
-                                ₱ 150.00
+                                ₱ {job.budget}
                             </Typography>
                         </Box>
                     </CardActions>

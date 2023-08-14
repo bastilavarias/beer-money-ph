@@ -21,12 +21,11 @@ class JobPostController extends Controller
                 "slots" => $request->input("slots"),
                 "author_id" => Auth::id(),
             ]);
-        info($jobPost);
 
-        //        return back()->with([
-        //            "code" => 200,
-        //            "message" => "Job post was created.",
-        //            "data" => $jobPost,
-        //        ]);
+        return back()->with([
+            "code" => 200,
+            "message" => "Job post was created.",
+            "data" => $jobPost,
+        ]);
     }
 }
